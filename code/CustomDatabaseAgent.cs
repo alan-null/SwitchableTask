@@ -89,8 +89,25 @@ namespace SwitchableTask
                 {
                     arrayList.Add(new ScheduleItem(innerItem));
                 }
+                else if (TemplateManager.GetTemplate(innerItem).InheritsFrom(TemplateIDs.Schedule))
+                {
+                    if (IsEnabled(innerItem))
+                    {
+                        arrayList.Add(new ScheduleItem(innerItem));
+                    }
+                    else
+                    {
+                        LogInfo("Not enabled: " + innerItem.Name);
+                    }
+                }
             }
             return arrayList.ToArray(typeof(ScheduleItem)) as ScheduleItem[];
+        }
+
+        protected virtual bool IsEnabled(Item innerItem)
+        {
+            var field = (CheckboxField)innerItem.Fields["Enabled"];
+            return field != null && field.Checked;
         }
     }
 }

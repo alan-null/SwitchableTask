@@ -1,0 +1,10 @@
+packages/
+# Build results
+[Bb]in/
+[Oo]bj/
+lib/
+
+# User specific files
+*.suo
+*.user
+.vs/
